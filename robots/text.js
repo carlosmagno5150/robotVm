@@ -5,6 +5,7 @@ const sbd = require('sbd')
 async function robot(content){
   
   await fetchContentFromWikipedia(content);
+  sanitizeContent(content);
   breakContentIntoSentences(content);
 
   async function fetchContentFromWikipedia(){
@@ -21,6 +22,17 @@ async function robot(content){
       content.summary = wikiPediaResponse.get().summary;
   }
 
+ function sanitizeContent(content){    
+    const allLines = content.summary.split('\n');
+    const withoutBlankLines = allLines.filter( (lines) =>{
+      if (lines.trim() === 0 || lines.trim().startsWith('=')){
+        return false;
+      }
+      return true;
+    });
+    content.summary = withoutBlankLines.join(' ');
+  }
+
   function breakContentIntoSentences(content){
     const sentences = sbd.sentences(content.summary);
     content.sentences =[];
@@ -33,9 +45,7 @@ async function robot(content){
     });    
   }
 
-  // function sanitizeContent(content){
-  //   const blankLine = removeBlankLines(content.)
-  // }
+ 
 }
 
 module.exports = robot;

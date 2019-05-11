@@ -13,3 +13,9 @@ async function start(){
 
 start();
 
+/*
+algorithmia.json
+{
+  apiKey = ""
+}
+ */
