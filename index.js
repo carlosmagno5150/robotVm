@@ -14,7 +14,7 @@ async function start(){
 start();
 
 /*
-algorithmia.json
+credentials/algorithmia.json
 {
   apiKey = ""
 }
